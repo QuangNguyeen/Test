@@ -17,6 +17,7 @@ void listDestroy(List &list);               /// Xoá list
 void listInput(List &list, T element);      /// Nhập Element vào list
 void listEnumerate(List & list);            /// In ra các phần tử trong list
 bool listIsEmpty(List &list);
+bool listUp(List);                          /// Kiem tra danh sach co tang hay khong
 int main(){
     List list;
     listInit(list);
@@ -31,6 +32,9 @@ int main(){
     cout<<endl;
     cout<<"List is inserted:"<<endl;
     listEnumerate(list);
+    if(listUp(list)){
+        cout<<"Tang";
+    } else cout<<"Khong tang";
     cout<<endl<<"Remove the element at the beginning of the list:  "<<endl;
     listPopFront(list);
     cout<<"List is removed:"<<endl;
@@ -80,5 +84,14 @@ void listEnumerate(List & list){ /// Dùng một con trỏ phụ để duyệt t
         cout << current->elem << " ";
         current = current->next;//
     }
+}
+bool listUp(List &list){
+    Node *current = list.head;
+    while(current != NULL){
+        if(current->elem > current->next->elem){
+            return false;
+        }
+    }
+    return true;
 }
 

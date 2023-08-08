@@ -1,33 +1,22 @@
-#include <QApplication>
-#include <QWidget>
-
-class MyWidget : public QWidget
-{
-public:
-    MyWidget(QWidget *parent = nullptr) : QWidget(parent)
-    {
-        // Create a label
-        QLabel *label = new QLabel("Hello, world!");
-
-        // Set the label's position
-        label->setGeometry(100, 100, 100, 30);
-
-        // Show the widget
-        show();
+#include<fstream>
+#include<iostream>
+using namespace std;
+bool isPerfect(int n){
+    int sum = 0;
+    for(int i = 0; i < n ; i++){
+        if(n % i == 0)
+            sum += i;
     }
-};
-
-int main(int argc, char *argv[])
-{
-    // Create an application
-    QApplication a(argc, argv);
-
-    // Create a widget
-    MyWidget w;
-
-    // Show the widget
-    w.show();
-
-    // Run the application
-    return a.exec();
+    return (sum == n);
+}
+int main(){
+    ofstream myfile("soHC.txt");
+    if(myfile.is_open()){
+        for(int i = 0; i < 100000; i++){
+            if(isPerfect(i))
+                myfile << i <<"\n";
+        }
+        myfile.close();
+    }
+    return 0;
 }
